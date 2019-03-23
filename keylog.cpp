@@ -377,24 +377,24 @@ LRESULT CALLBACK LLKeyboardProc(int nCode, WPARAM wp, LPARAM lp)
             }
         } else {
 
-			OutputDebugStringW(L"isDeadKey4\n");//123456789numpad123456789/*-+.0
+			OutputDebugStringW(L"isDeadKey4\n");//123456789numpad123456789/*-+.0123456789gkkuyljkhll;
 
             WORD a = 0;
             BOOL mod = modifierkey[0] != '\0'; 
-			theKey = getModSpecialKey(k.vkCode, mod);
-			fin = 1;
-            //if(k.vkCode == 0x08 || k.vkCode == 0x09 || k.vkCode == 0x0D || k.vkCode == 0x1B || k.vkCode == 0x20) {
-            //    // for <BS>/<Tab>/<ENTER>/<ESC>/<SPACE>, treat them as specialKeys1
-            //    theKey = getModSpecialKey(k.vkCode, mod);
-            //    fin = 1;
-			//	OutputDebugStringW(L"isDeadKey5\n");
-            //} else if( !(theKey = GetSymbolFromVK(k.vkCode, k.scanCode, mod, hklLayout))) {
-            //    // otherwise try to translate with ToAsciiEx
-            //    // if fails to translate with ToAsciiEx, then treat it as specialKeys
-            //    theKey = getModSpecialKey(k.vkCode, mod);
-            //    fin = 1;
-			//	OutputDebugStringW(L"isDeadKey6\n");	//12
-            //}
+			//theKey = getModSpecialKey(k.vkCode, mod);
+			//fin = 1;
+            if(k.vkCode == 0x08 || k.vkCode == 0x09 || k.vkCode == 0x0D || k.vkCode == 0x1B || k.vkCode == 0x20|| (k.vkCode >= 0x60 && k.vkCode <= 0x6F) ){
+                // for <BS>/<Tab>/<ENTER>/<ESC>/<SPACE>, treat them as specialKeys1
+                theKey = getModSpecialKey(k.vkCode, mod);
+                fin = 1;
+				OutputDebugStringW(L"isDeadKey5\n");
+            } else if( !(theKey = GetSymbolFromVK(k.vkCode, k.scanCode, mod, hklLayout))) {
+                // otherwise try to translate with ToAsciiEx
+                // if fails to translate with ToAsciiEx, then treat it as specialKeys
+                theKey = getModSpecialKey(k.vkCode, mod);
+                fin = 1;
+				OutputDebugStringW(L"isDeadKey6\n");	//12
+            }
 
             if(theKey) {
                 if(mod) {
